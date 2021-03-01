@@ -55,4 +55,13 @@ async def on_raw_reaction_add(payload):
         if emojiuser == messageuser:
             await message.remove_reaction(emoji, member)
 
+    if payload.emoji.name == "MonkaLasarEyes":
+        channel = bot.get_channel(payload.channel_id)
+        message = await channel.fetch_message(payload.message_id)
+        reaction = (message.reactions)
+        
+        for r in reaction:
+            if r.emoji.name == 'MonkaLasarEyes' and r.count > 4:
+                await message.delete()
+    
 bot.run(TOKEN)
